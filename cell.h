@@ -57,11 +57,11 @@ int getNeighbors(cell c);
  *
  * @param cells its a typedef of pointer int 
   */
-void kill(cell *c);
+void kill(cell *c, int size);
 
 /** 
  * Turn to alive all cell in this array 
  *
  * @param cells its a typedef of pointer int 
   */
-void rise(cell *c);
+void rise(cell *c, int size);
