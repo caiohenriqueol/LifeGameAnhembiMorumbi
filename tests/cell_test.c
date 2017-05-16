@@ -1,5 +1,7 @@
 #include "../cell.h"
 
+#define LIMIT_CELLS 5 
+
 int SIZE_X = 5;
 int SIZE_Y = 5;
 
@@ -17,18 +19,18 @@ typedef struct t_cases {
 	bool Expected;
 }Cases;
 
-int LIMIT_CELLS = 5;
 
 void TestIsAlive() {
 	cell *tcells; 
-
 	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
 	initialize_cells(tcells);
+	printf("entrou aqui 2");
 	SIZE_Y = SIZE_X = 5;
 
 	//alive test
-	tcells[0][1] = ALIVE;
-
+	tcells[0][0] = ALIVE;
+	printf("entrou aqui");
+/*
 	Cases cases[5] = {
 		{
 		  .Description = "When Try",	
@@ -62,6 +64,7 @@ void TestIsAlive() {
 
 	int i;
 
+	printf("entrou aqui");
 	for(i =0; i < 5; i += 1) {
 		Cases cs = cases[i];
 		bool result = isAlive(cs.cells, cs.Position.x, cs.Position.y);
@@ -69,6 +72,7 @@ void TestIsAlive() {
 		   printf("Unexpected result %d, expected %d",result,cs.Expected);
 		}
 	}
+	*/
 } 
 
 void initialize_cells(cell *cells) {

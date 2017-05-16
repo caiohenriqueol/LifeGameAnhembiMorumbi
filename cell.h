@@ -4,7 +4,7 @@
 
 
 //ERRORS
-const char CELL_ERR_INDEX_OUT_OF_RANGE[255] = "Index Out Of Range Exception when try acess some cell";
+#define CELL_ERR_INDEX_OUT_OF_RANGE "Index Out Of Range Exception when try acess some cell"
 
 //Cell functions
 typedef enum e_direction {
