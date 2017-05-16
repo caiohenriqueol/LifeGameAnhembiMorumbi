@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "utils.h"
 
-int LIMIT_CELLS= 1000;
+int LIMIT_CELLS = 1000;
 
 //ERRORS
 #define CELL_ERR_INDEX_OUT_OF_RANGE "Index Out Of Range Exception when try acess some cell" 
