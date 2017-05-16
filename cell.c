@@ -1,22 +1,7 @@
 #include <stdio.h>
 #include "cell.h"
 
-void kill(cell c, int size) {
-	int i;
-
-    for (i = 0; i < size; i++) {
-        c[i] = 0;
-	}
-}
-
-void rise(cell c, int size){
-    int i;
-
-    for (i = 0; i < size; i++) {
-        c[i] = 1;
-    }
-}
-
+int LIMIT_CELLS = 1000;
 bool isStayAlive(cell *cells, int x, int y) {
 	__validate_index_in_range_matriz(x,y);
 
@@ -72,9 +57,25 @@ int getNeighbors(cell *c, int x, int y) {
 	return neighbors;
 }
 
+void kill(cell c, int size) {
+	int i;
+
+	for (i = 0; i < size; i++) {
+		c[i] = 0;
+	}
+}
+
+void rise(cell c, int size){
+    int i;
+
+    for (i = 0; i < size; i++) {
+        c[i] = 1;
+    }
+}
+
 void __validate_index_in_range_matriz(int  x,int y) {
 	if(x < 0 || y < 0 || x > LIMIT_CELLS || y > LIMIT_CELLS) {
-		printf(stderr, CELL_ERR_INDEX_OUT_OF_RANGE);
+		fprintf(stderr, "%s", CELL_ERR_INDEX_OUT_OF_RANGE);
 		exit(EXIT_FAILURE);
 	}
 }

@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include "utils.h"
 
-int LIMIT_CELLS = 1000;
 
 //ERRORS
-#define CELL_ERR_INDEX_OUT_OF_RANGE "Index Out Of Range Exception when try acess some cell" 
+const char CELL_ERR_INDEX_OUT_OF_RANGE[255] = "Index Out Of Range Exception when try acess some cell";
 
 //Cell functions
 typedef enum e_direction {
@@ -74,7 +73,7 @@ int getNeighbors(cell *c, int x, int y);
  *
  * @param cells its a typedef of pointer int 
   */
-void kill(cell *c, int size);
+void kill(cell c, int size);
 
 /** 
  * Turn to alive all cell in this array 
@@ -82,7 +81,7 @@ void kill(cell *c, int size);
  * @param cells its a typedef of pointer int 
   */
 
-void rise(cell *c, int size);
+void rise(cell c, int size);
 
 /** 
  * Check if , is a valid indice 

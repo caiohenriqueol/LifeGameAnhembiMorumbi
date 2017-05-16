@@ -17,11 +17,13 @@ typedef struct t_cases {
 	bool Expected;
 }Cases;
 
+int LIMIT_CELLS = 5;
 
 void TestIsAlive() {
 	cell *tcells; 
+
+	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
 	initialize_cells(tcells);
-	LIMIT_CELLS= 5;
 	SIZE_Y = SIZE_X = 5;
 
 	//alive test
@@ -73,7 +75,6 @@ void initialize_cells(cell *cells) {
 	int x = 0;
 	int y = 0;
 	cells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
-
 
 	for(x = 0; x <  SIZE_X; x+=1) {
 		cells[x] = (cell)malloc(LIMIT_CELLS*sizeof(int));
