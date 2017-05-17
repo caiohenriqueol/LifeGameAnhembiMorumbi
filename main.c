@@ -1,7 +1,8 @@
 #include "cell.c"
+#include "file.c"
 #include <time.h>
 #include <stdlib.h>
-#include <stdio.h>
+#include <stdio.h> 
 
 int main() {
     int linha, coluna, generation;
@@ -17,7 +18,7 @@ int main() {
     vKill = (cell*)calloc(kill_rise_size, sizeof(cell));
     vRise = (cell*)calloc(kill_rise_size, sizeof(cell));
     population = (cell*)calloc(population_size, sizeof(cell));
-
+    
     srand(time(NULL));
 
     for (linha = 0; linha < population_size; linha++) {
