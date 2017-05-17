@@ -74,7 +74,7 @@ int getNeighbors(cell *c, int x, int y);
  *
  * @param cells its a typedef of pointer int 
   */
-void kill(cell *c, int size);
+void kill(cell c, int size);
 
 /** 
  * Turn to alive all cell in this array 
@@ -82,7 +82,7 @@ void kill(cell *c, int size);
  * @param cells its a typedef of pointer int 
   */
 
-void rise(cell *c, int size);
+void rise(cell c, int size);
 
 /** 
  * Check if , is a valid indice 

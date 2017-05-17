@@ -74,7 +74,7 @@ int getNeighbors(cell *c, int x, int y) {
 
 void __validate_index_in_range_matriz(int  x,int y) {
 	if(x < 0 || y < 0 || x > LIMIT_CELLS || y > LIMIT_CELLS) {
-		printf(stderr, CELL_ERR_INDEX_OUT_OF_RANGE);
+		fprintf(stderr, CELL_ERR_INDEX_OUT_OF_RANGE);
 		exit(EXIT_FAILURE);
 	}
 }
