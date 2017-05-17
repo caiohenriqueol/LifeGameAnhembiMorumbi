@@ -8,7 +8,7 @@ int main() {
     int cont_kill, cont_rise;    
     cell vKill;
     cell vRise;
-    cell* population;
+    cell *population;
     int generation = 1;
     int population_size = 10;
     int kill_rise_size = 100;
@@ -23,6 +23,7 @@ int main() {
         population[i] = (cell)calloc(population_size, sizeof(cell));
     }
 
+    printf("******************* POPULACAO *****************\n");
     for (i = 0; i < population_size; i++) {
         for (j = 0; j < population_size; j++) {
             population[i][j] = rand()%2;
@@ -30,11 +31,15 @@ int main() {
         }
         printf("\n");
     }
+    printf("******************* POPULACAO *****************\n");
+    printf("\n\n\n");
 
     for (verify = 0; verify < generation; verify++) {
         cont_kill = cont_rise = 0;
         for (i = 0; i < population_size; i++) {
             for (j = 0; j < population_size; j++) {
+		  printf("posição %d, %d\n", i, j);
+
                 if (isStayAlive(population, i, j)) {
                     vRise[cont_rise] = population[i][j];
                     cont_rise++;
@@ -48,8 +53,9 @@ int main() {
         rise(vRise, population_size);
     }
 
+
     printf("\n\n\n");
-    printf("----------------------------");
+    printf("************** RESULTADO *****************\n");
 
     for (i = 0; i < population_size; i++){
         for (j = 0; j < population_size; j++){
@@ -57,6 +63,6 @@ int main() {
         }
         printf("\n");
     }
-                
+    printf("************** RESULTADO *****************");
     return 1;
 }

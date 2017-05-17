@@ -7,6 +7,15 @@ int main() {
 	TestIsAlive();
 	printf("END : TestIsAlive \n");
 
+	printf("\n\n");
+
+	printf("RUN : TestIsStayAlive \n");
+	TestIsStayAlive();
+	printf("END : TestIsStayAlive \n");
+
 	printf("*********************** END :TEST UNIT ****************************\n");
+
+
+	printf("\n\n");
 	return 1;
 }
