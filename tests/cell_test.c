@@ -1,6 +1,5 @@
+#include "testunit.h"
 #include "../cell.h"
-
-#define LIMIT_CELLS 5 
 
 int SIZE_X = 5;
 int SIZE_Y = 5;
@@ -13,7 +12,7 @@ typedef struct t_coordinate {
 }Coordinate;
 
 typedef struct t_cases {
-	char Description[10];
+	char Description[40];
 	cell *cells;
 	Coordinate Position;
 	bool Expected;
@@ -24,61 +23,46 @@ void TestIsAlive() {
 	cell *tcells; 
 	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
 	initialize_cells(tcells);
-	printf("entrou aqui 2");
 	SIZE_Y = SIZE_X = 5;
 
 	//alive test
-	tcells[0][0] = ALIVE;
-	printf("entrou aqui");
-/*
-	Cases cases[5] = {
+	tcells[0][1] = ALIVE;
+	tcells[2][3] = ALIVE;
+	tcells[4][4] = ALIVE;
+	tcells[3][1] = ALIVE;
+
+	Cases cases[3] = {
 		{
-		  .Description = "When Try",	
+		  .Description = "When try verify a cell alive",	
 		  .cells = tcells,
 		  .Position = {.x= 0, .y=1},
 		  .Expected = true
-
 		},
 		{
-		  .Description = "When Try",	
+		  .Description = "When try verify a cell dead",	
 		  .cells = tcells,
-		  .Position = {.x= 0, .y=1},
-		  .Expected = true
-
+		  .Position = {.x= 0, .y=0},
+		  .Expected = DEAD
 		},
-		{
-		  .Description = "When Try",	
-		  .cells = tcells,
-		  .Position = {.x= 0, .y=1},
-		  .Expected = true
-
-		},
-		{
-		  .Description = "When Try",	
-		  .cells = tcells,
-		  .Position = {.x= 0, .y=1},
-		  .Expected = true
-
-		}
 	}; 
 
 	int i;
 
-	printf("entrou aqui");
-	for(i =0; i < 5; i += 1) {
+	for(i =0; i < 2; i += 1) {
 		Cases cs = cases[i];
+		printf("%s\n",cs.Description);
 		bool result = isAlive(cs.cells, cs.Position.x, cs.Position.y);
 		if(result != cs.Expected) {
-		   printf("Unexpected result %d, expected %d",result,cs.Expected);
+		   FAIL("	Unexpected result %d, expected %d\n", result, cs.Expected);
+		} else {
+		   SUCESS("	PASS\n");
 		}
 	}
-	*/
 } 
 
 void initialize_cells(cell *cells) {
 	int x = 0;
 	int y = 0;
-	cells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
 
 	for(x = 0; x <  SIZE_X; x+=1) {
 		cells[x] = (cell)malloc(LIMIT_CELLS*sizeof(int));
@@ -87,4 +71,5 @@ void initialize_cells(cell *cells) {
 		}
 	}
 }
+
 

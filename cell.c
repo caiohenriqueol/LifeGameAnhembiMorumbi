@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "cell.h"
 
-#define LIMIT_CELLS 1000
-
 bool isStayAlive(cell *cells, int x, int y) {
 	__validate_index_in_range_matriz(x,y);
 
