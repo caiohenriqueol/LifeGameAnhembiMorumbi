@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "cell.h"
 
+#ifndef LIMIT_CELLS  
+  #define LIMIT_CELLS 9 
+#endif
 bool isStayAlive(cell *cells, int x, int y) {
 	__validate_index_in_range_matriz(x,y);
 
@@ -33,23 +36,23 @@ int getNeighbors(cell *c, int x, int y) {
 	__validate_index_in_range_matriz(x,y);
 	int neighbors = 0;
 
-	//verify top
-	if(y > 0 && c[x][y-1] == ALIVE)  {
-		neighbors += 1;	
-	}
-
-	//verify bottom
-	if(y < LIMIT_CELLS && c[x][y+1] == ALIVE)  {
-		neighbors += 1;	
-	}
-
 	//verify left
-	if(x > 0 && c[x-1][y] == ALIVE)  {
+	if(x > 0 && c[y][x-1] == ALIVE)  {
 		neighbors += 1;	
 	}
 
 	//verify right 
-	if(x < LIMIT_CELLS && c[x+1][y] == ALIVE)  {
+	if(x < LIMIT_CELLS && c[y][x+1] == ALIVE)  {
+		neighbors += 1;	
+	}
+
+	//verify top
+	if(y > 0 && c[y-1][x] == ALIVE)  {
+		neighbors += 1;	
+	}
+
+	//verify bottom
+	if(y < LIMIT_CELLS && c[y+1][x] == ALIVE)  {
 		neighbors += 1;	
 	}
 

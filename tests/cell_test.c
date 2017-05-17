@@ -14,6 +14,13 @@ typedef struct t_cases {
 	bool Expected;
 }Cases;
 
+typedef struct t_cases_neighbors {
+	char Description[100];
+	cell *cells;
+	Coordinate Position;
+	int Amount;
+}CasesNeighbors;
+
 void TestIsStayAlive() {
 	cell *tcells; 
 	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
@@ -57,6 +64,49 @@ void TestIsStayAlive() {
 		bool result = isStayAlive(cs.cells, cs.Position.x, cs.Position.y);
 		if(result != cs.Expected) {
 		   FAIL("	Unexpected result %d, expected %d\n", result, cs.Expected);
+		} else {
+		   SUCESS("	PASS\n");
+		}
+	}
+}
+
+void TestGetNeighbors() {
+	cell *tcells; 
+	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
+	initialize_cells(tcells, 10, 10);
+
+	//that can be alive test (0,1)
+	tcells[0][1] = ALIVE; //has 2 neighbors
+	tcells[1][1] = ALIVE;
+	tcells[0][2] = ALIVE;
+
+	//that can't be alive
+	tcells[2][3] = ALIVE;
+	tcells[4][4] = ALIVE;
+	tcells[3][1] = ALIVE;
+
+	CasesNeighbors cases[3] = {
+		{
+		  .Description = "When have a two neighbors",	
+		  .cells = tcells,
+		  .Position = {.x= 0, .y=1},
+		  .Amount = 2 
+		},
+		{
+		  .Description = "When have a no one neighbors",	
+		  .cells = tcells,
+		  .Position = {.x= 3, .y=1},
+		  .Amount = 0 
+		},
+	}; 
+
+	int i;
+	for(i =0; i < 2; i += 1) {
+		CasesNeighbors cs = cases[i];
+		printf("%s\n",cs.Description);
+		bool result = isStayAlive(cs.cells, cs.Position.x, cs.Position.y);
+		if(result != cs.Amount) {
+		   FAIL("	Unexpected amount of neighbors %d, expected %d\n", result, cs.Amount);
 		} else {
 		   SUCESS("	PASS\n");
 		}

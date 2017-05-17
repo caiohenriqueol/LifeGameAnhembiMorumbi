@@ -5,9 +5,6 @@
 //ERRORS
 #define CELL_ERR_INDEX_OUT_OF_RANGE "Index Out Of Range Exception when try acess some cell"
 
-#ifndef LIMIT_CELLS  
-  #define LIMIT_CELLS 1000
-#endif
 
 //Cell functions
 typedef enum e_direction {

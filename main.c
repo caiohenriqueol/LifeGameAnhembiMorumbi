@@ -4,12 +4,13 @@
 #include <stdio.h>
 
 int main() {
-    int i, j, verify;
+    int linha, coluna, generation;
     int cont_kill, cont_rise;    
     cell vKill;
     cell vRise;
     cell *population;
-    int generation = 1;
+    int MAX_GENERATION = 1;
+
     int population_size = 10;
     int kill_rise_size = 100;
 
@@ -19,32 +20,32 @@ int main() {
 
     srand(time(NULL));
 
-    for (i = 0; i < population_size; i++) {
-        population[i] = (cell)calloc(population_size, sizeof(cell));
+    for (linha = 0; linha < population_size; linha++) {
+        population[linha] = (cell)calloc(population_size, sizeof(cell));
     }
 
     printf("******************* POPULACAO *****************\n");
-    for (i = 0; i < population_size; i++) {
-        for (j = 0; j < population_size; j++) {
-            population[i][j] = rand()%2;
-            printf("%d  ", population[i][j]);
+    for (linha = 0; linha < population_size; linha++) {
+        for (coluna = 0; coluna < population_size; coluna++) {
+            population[linha][coluna] = rand()%2;
+            printf("%d  ", population[linha][coluna]);
         }
         printf("\n");
     }
     printf("******************* POPULACAO *****************\n");
     printf("\n\n\n");
 
-    for (verify = 0; verify < generation; verify++) {
+    for (generation = 0; generation < MAX_GENERATION; generation++) {
         cont_kill = cont_rise = 0;
-        for (i = 0; i < population_size; i++) {
-            for (j = 0; j < population_size; j++) {
-		  printf("posição %d, %d\n", i, j);
+        for (linha = 0; linha < population_size; linha++) {
+            for (coluna = 0; coluna < population_size; coluna++) {
+		printf("posição %d, %d\n", linha, coluna);
 
-                if (isStayAlive(population, i, j)) {
-                    vRise[cont_rise] = population[i][j];
+                if (isStayAlive(population, coluna, linha)) {
+                    vRise[cont_rise] = population[linha][coluna];
                     cont_rise++;
                 } else {
-                    vKill[cont_kill] = population[i][j];
+                    vKill[cont_kill] = population[linha][coluna];
                     cont_kill++;
                 }
             }
@@ -57,9 +58,9 @@ int main() {
     printf("\n\n\n");
     printf("************** RESULTADO *****************\n");
 
-    for (i = 0; i < population_size; i++){
-        for (j = 0; j < population_size; j++){
-            printf("%d  ", population[i][j]);
+    for (linha = 0; linha < population_size; linha++){
+        for (coluna = 0; coluna < population_size; coluna++){
+            printf("%d  ", population[linha][coluna]);
         }
         printf("\n");
     }
