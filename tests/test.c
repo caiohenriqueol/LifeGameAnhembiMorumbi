@@ -8,8 +8,7 @@ int main() {
 	printf("END : TestGetNeighbors \n");
 
 	printf("\n\n");
-/*
-	printf("*********************** END :TEST UNIT ****************************\n");
+
 	printf("RUN : TestIsAlive \n");
 	TestIsAlive();
 	printf("END : TestIsAlive \n");
@@ -21,7 +20,7 @@ int main() {
 	printf("END : TestIsStayAlive \n");
 
 	printf("*********************** END :TEST UNIT ****************************\n");
-*/
+
 
 	printf("\n\n");
 	return 1;

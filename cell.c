@@ -2,7 +2,7 @@
 #include "cell.h"
 
 #ifndef LIMIT_CELLS  
-  #define LIMIT_CELLS 9 
+  #define LIMIT_CELLS 4 
 #endif
 bool isStayAlive(cell *cells, int x, int y) {
 	__validate_index_in_range_matriz(x,y);
@@ -24,12 +24,12 @@ bool isStayAlive(cell *cells, int x, int y) {
 bool isAlive(cell *c, int x, int y) {
 	__validate_index_in_range_matriz(x,y);
 
-	return (c[x][y] == ALIVE);
+	return (c[y][x] == ALIVE);
 } 
 
 bool canRise(cell *c,int x, int y) {
 	__validate_index_in_range_matriz(x,y);
-	return (c[x][y] == ALIVE);
+	return (c[y][x] == ALIVE);
 }
 
 int getNeighbors(cell *c, int x, int y) {
@@ -59,19 +59,19 @@ int getNeighbors(cell *c, int x, int y) {
 	return neighbors;
 }
 
-void kill(cell c, int size) {
+void kill(cell *c, int size) {
 	int i;
 
 	for (i = 0; i < size; i++) {
-		c[i] = 0;
+		*c[i] = 0;
 	}
 }
 
-void rise(cell c, int size){
+void rise(cell *c, int size){
     int i;
 
     for (i = 0; i < size; i++) {
-        c[i] = 1;
+        *c[i] = 1;
     }
 }
 

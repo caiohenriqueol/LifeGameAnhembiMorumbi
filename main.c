@@ -6,16 +6,16 @@
 int main() {
     int linha, coluna, generation;
     int cont_kill, cont_rise;    
-    cell vKill;
-    cell vRise;
+    cell *vKill;
+    cell *vRise;
     cell *population;
     int MAX_GENERATION = 1;
 
-    int population_size = 10;
+    int population_size = 5;
     int kill_rise_size = 100;
 
-    vKill = (cell)calloc(kill_rise_size, sizeof(cell));
-    vRise = (cell)calloc(kill_rise_size, sizeof(cell));
+    vKill = (cell*)calloc(kill_rise_size, sizeof(cell));
+    vRise = (cell*)calloc(kill_rise_size, sizeof(cell));
     population = (cell*)calloc(population_size, sizeof(cell));
 
     srand(time(NULL));
@@ -39,19 +39,18 @@ int main() {
         cont_kill = cont_rise = 0;
         for (linha = 0; linha < population_size; linha++) {
             for (coluna = 0; coluna < population_size; coluna++) {
-		printf("posição %d, %d\n", linha, coluna);
-
                 if (isStayAlive(population, coluna, linha)) {
-                    vRise[cont_rise] = population[linha][coluna];
+                    vRise[cont_rise] = &population[linha][coluna];
                     cont_rise++;
                 } else {
-                    vKill[cont_kill] = population[linha][coluna];
+                    vKill[cont_kill] = &population[linha][coluna];
                     cont_kill++;
                 }
             }
         }
-        kill(vKill, population_size);
-        rise(vRise, population_size);
+
+	kill(vKill, cont_kill);
+	rise(vRise, cont_rise);
     }
 
 
