@@ -93,3 +93,12 @@ void rise(cell c, int size);
  * @param y  its index vertical of array you can check
   */
 void __validate_index_in_range_matriz(int  x,int y); 
+
+
+/** 
+ * Initialize a matrix of cell with limit x and y especifed
+ *
+ * @param SIZE_X  its a limit on horizontal
+ * @param SIZE_Y  its a limit on vertical
+  */
+void initialize_cells(cell *cells, int SIZE_X, int SIZE_Y);

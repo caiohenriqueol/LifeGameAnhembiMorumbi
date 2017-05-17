@@ -72,6 +72,19 @@ void rise(cell c, int size){
     }
 }
 
+//HELPERS
+void initialize_cells(cell *cells, int SIZE_X, int SIZE_Y) {
+	int x = 0;
+	int y = 0;
+
+	for(x = 0; x <  SIZE_X; x+=1) {
+		cells[x] = (cell)malloc(LIMIT_CELLS*sizeof(int));
+		for(y = 0; y <  SIZE_Y; y+=1) { 
+			cells[x][y] = 0;	
+		}
+	}
+}
+
 void __validate_index_in_range_matriz(int  x,int y) {
 	if(x < 0 || y < 0 || x > LIMIT_CELLS || y > LIMIT_CELLS) {
 		fprintf(stderr, "%s", CELL_ERR_INDEX_OUT_OF_RANGE);
