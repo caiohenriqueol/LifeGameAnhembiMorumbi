@@ -23,7 +23,13 @@ int main(int argc, char *argv[]) {
     }
 
     printf("******************* POPULACAO *****************\n");
-    importPopulation(population, argv[1], LIMIT_CELLS);
+    importPopulation(population, argv[1], 5);
+    for (linha = 0; linha < population_size; linha++){
+        for (coluna = 0; coluna < population_size; coluna++){
+            printf("%d  ", population[linha][coluna]);
+        }
+        printf("\n");
+    }
     printf("******************* POPULACAO *****************\n");
     printf("\n\n\n");
 
