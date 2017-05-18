@@ -1,11 +1,10 @@
 #include "testunit.h"
 
 void __msg(char color[10], const char *fmt, va_list args) {
-	char *new;
-	new = (char *)malloc(1*sizeof(char));
-	new = strcat(new, color);
-	new = strcat(new, fmt);
-	new = strcat(new, RESET);
+	char new[10000];
+	strcpy(new, color);
+	strcat(new, fmt);
+	strcat(new, RESET);
 	vprintf(new , args);
 }
 

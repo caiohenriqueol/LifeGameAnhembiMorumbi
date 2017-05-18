@@ -21,6 +21,54 @@ typedef struct t_cases_neighbors {
 	int Amount;
 }CasesNeighbors;
 
+void setMatriz(cell *c, int matriz[5][5]); 
+void TestReadFile() {
+	cell *tcells, *expected;
+	int size = 5;
+
+	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
+	expected = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
+
+	initialize_cells(tcells, size, size);
+	initialize_cells(expected, size, size);
+
+	int l[5][5] = {
+		{1,1,0,1,1},
+		{1,0,0,1,0},
+		{1,0,0,1,0},
+		{1,0,0,1,0},
+		{1,0,0,1,0},
+	};
+
+	setMatriz(expected, l);
+
+	int generation = importPopulation(tcells, "./samples/lifegame.txt", 5);
+
+	printf("   Verify generation returned \n");
+
+	if(generation != 10) {
+		FAIL("	Unexpected generation %d, expected %d\n", generation, 10);
+	} else {
+		SUCESS("  PASS\n");
+	}
+
+	printf("  Verify value in population\n");
+	int linha = 0;
+	int coluna = 0;
+
+	for (linha = 0; linha < size; linha++) {
+		for (coluna = 0; coluna < size; coluna++) {
+			int cell_returned = tcells[linha][coluna];
+			int cell_expected = expected[linha][coluna];
+			if(cell_returned != cell_expected) {
+				FAIL("	(line %d, column %d) : Unexpected value %d, expected %d\n",linha, coluna, cell_returned , cell_expected);
+			} else {
+				SUCESS("  PASS\n");
+			}
+		}
+	}
+}
+
 void TestIsStayAlive() {
 	cell *tcells; 
 	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
@@ -153,3 +201,11 @@ void TestIsAlive() {
 	}
 } 
 
+void setMatriz(cell *c, int matriz[5][5]) {
+	int linha, coluna;
+	for (linha = 0; linha < 5; linha++) {
+		for (coluna = 0; coluna < 5; coluna++) {
+			c[linha][coluna] = matriz[linha][coluna];
+		}
+	}
+}

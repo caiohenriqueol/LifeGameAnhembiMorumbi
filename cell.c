@@ -75,6 +75,44 @@ void rise(cell *c, int size){
     }
 }
 
+int importPopulation(cell *c, char *path, int length) {
+	int generation;
+	char buff[length+2];
+	FILE *file;
+
+	file = fopen(path, "r");
+	if (file == NULL) {
+		fprintf(stderr, "%s: %s\n", CELL_ERR_FILE_NOT_OPEN, path);
+		exit(EXIT_FAILURE);
+	}
+	int linha = 0;
+	generation = -1;
+	while (fgets(buff,sizeof buff, file) != NULL){
+		 if(generation == -1) {
+			generation = atoi(buff);
+			continue;
+		} 
+
+		int coluna; 
+		for(coluna=0; coluna < sizeof buff; coluna++) {
+			if(buff[coluna] == '\n' ||
+			   buff[coluna] == ' '  ||
+			   buff[coluna] == '\0'  
+			) { continue; }
+
+			if(buff[coluna] == '0') {
+				c[linha][coluna]= 0; 
+			} else if(buff[coluna] == '1') {
+				c[linha][coluna]= 1; 
+			}
+		}
+		linha++;
+	}
+	fclose(file);
+
+	return generation;
+}
+
 //HELPERS
 void initialize_cells(cell *cells, int SIZE_X, int SIZE_Y) {
 	int x = 0;
@@ -90,7 +128,7 @@ void initialize_cells(cell *cells, int SIZE_X, int SIZE_Y) {
 
 void __validate_index_in_range_matriz(int  x,int y) {
 	if(x < 0 || y < 0 || x > LIMIT_CELLS || y > LIMIT_CELLS) {
-		fprintf(stderr, "%s", CELL_ERR_INDEX_OUT_OF_RANGE);
+		fprintf(stderr, "%s: line = %d, column = %d", CELL_ERR_INDEX_OUT_OF_RANGE, y, x);
 		exit(EXIT_FAILURE);
 	}
 }

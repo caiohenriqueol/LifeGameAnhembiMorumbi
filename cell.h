@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "utils.h"
 
 //ERRORS
 #define CELL_ERR_INDEX_OUT_OF_RANGE "Index Out Of Range Exception when try acess some cell"
+#define CELL_ERR_FILE_NOT_FOUND "File not found in path passed"
+#define CELL_ERR_FILE_NOT_OPEN "Unexpected error to open file"
 
 
 //Cell functions
@@ -91,7 +94,6 @@ void rise(cell *c, int size);
   */
 void __validate_index_in_range_matriz(int  x,int y); 
 
-
 /** 
  * Initialize a matrix of cell with limit x and y especifed
  *
@@ -99,3 +101,13 @@ void __validate_index_in_range_matriz(int  x,int y);
  * @param SIZE_Y  its a limit on vertical
   */
 void initialize_cells(cell *cells, int SIZE_X, int SIZE_Y);
+
+/** 
+ * Import a file to initialize the population 
+ *
+ * @param cells its a typedef of pointer int 
+ * @param file pass a full physical path  
+ * @param lenght is the amount of characters that a single line reaches 
+ * @return the start generation to the game 
+  */
+int importPopulation(cell *c, char *path, int lenght);
