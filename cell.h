@@ -30,6 +30,7 @@ typedef int *cell;
 
 //FUNCTIONS
 
+void setLIMIT(int limit);
 /** 
  * Verify if cell can stay alive in this generation  
  * 
@@ -110,4 +111,4 @@ void initialize_cells(cell *cells, int SIZE_X, int SIZE_Y);
  * @param lenght is the amount of characters that a single line reaches 
  * @return the start generation to the game 
   */
-int importPopulation(cell *c, char *path, int lenght);
+cell * importPopulation(int *size, char *path, int lenght);

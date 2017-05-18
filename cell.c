@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "cell.h"
 
-#ifndef LIMIT_CELLS  
-  #define LIMIT_CELLS 4 
-#endif
+int LIMIT_CELLS=1000;
+void setLIMIT(int limit) {
+	LIMIT_CELLS = limit;
+}
+
 bool isStayAlive(cell *cells, int x, int y) {
 	__validate_index_in_range_matriz(x,y);
 
@@ -42,7 +44,7 @@ int getNeighbors(cell *c, int x, int y) {
 	}
 
 	//verify right 
-	if(x < LIMIT_CELLS && c[y][x+1] == ALIVE)  {
+	if(x < (LIMIT_CELLS-1) && c[y][x+1] == ALIVE)  {
 		neighbors += 1;	
 	}
 
@@ -52,7 +54,7 @@ int getNeighbors(cell *c, int x, int y) {
 	}
 
 	//verify bottom
-	if(y < LIMIT_CELLS && c[y+1][x] == ALIVE)  {
+	if(y < (LIMIT_CELLS-1) && c[y+1][x] == ALIVE)  {
 		neighbors += 1;	
 	}
 
@@ -75,9 +77,9 @@ void rise(cell *c, int size){
     }
 }
 
-int importPopulation(cell *c, char *path, int length) {
-	int generation;
+cell * importPopulation(int *size, char *path, int length ) {
 	char buff[length+2];
+	cell *c;
 	FILE *file;
 
 	file = fopen(path, "r");
@@ -85,16 +87,24 @@ int importPopulation(cell *c, char *path, int length) {
 		fprintf(stderr, "%s: %s\n", CELL_ERR_FILE_NOT_OPEN, path);
 		exit(EXIT_FAILURE);
 	}
+
+	*size = -1;
+
 	int linha = 0;
-	generation = -1;
 	while (fgets(buff,sizeof buff, file) != NULL){
-		 if(generation == -1) {
-			generation = atoi(buff);
+		 if(*size == -1) {
+			*size = atoi(buff);
+
+			c = calloc(*size , sizeof(cell)); 
+			int j = 0;
+			for (j = 0; j < *size; j++) {
+				c[j] = calloc(*size , sizeof(cell));
+			}
 			continue;
 		} 
 
 		int coluna; 
-		for(coluna=0; coluna < sizeof buff; coluna++) {
+		for(coluna=0; coluna < *size; coluna++) {
 			if(buff[coluna] == '\n' ||
 			   buff[coluna] == ' '  ||
 			   buff[coluna] == '\0'  
@@ -110,7 +120,7 @@ int importPopulation(cell *c, char *path, int length) {
 	}
 	fclose(file);
 
-	return generation;
+	return c;
 }
 
 //HELPERS

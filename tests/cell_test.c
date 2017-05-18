@@ -1,7 +1,8 @@
 #include "testunit.h"
 #include "../cell.h"
 
-#define LIMIT_CELLS 5
+int _LIMIT_CELLS = 5;
+
 typedef struct t_coordinate {
 	int x;
 	int y;
@@ -23,12 +24,11 @@ typedef struct t_cases_neighbors {
 
 void setMatriz(cell *c, int matriz[5][5]); 
 void TestReadFile() {
+	setLIMIT(5);
 	cell *tcells, *expected;
 	int size = 5;
 
-	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
-	expected = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
-
+	expected = (cell *)malloc(5*sizeof(cell));
 	initialize_cells(tcells, size, size);
 	initialize_cells(expected, size, size);
 
@@ -42,11 +42,12 @@ void TestReadFile() {
 
 	setMatriz(expected, l);
 
-	int generation = importPopulation(tcells, "./samples/lifegame.txt", 5);
+	int generation =0;
+	tcells = importPopulation(&generation, "./samples/lifegame.txt", 5);
 
 	printf("   Verify generation returned \n");
 
-	if(generation != 10) {
+	if(generation != 5) {
 		FAIL("	Unexpected generation %d, expected %d\n", generation, 10);
 	} else {
 		SUCESS("  PASS\n");
@@ -67,11 +68,13 @@ void TestReadFile() {
 			}
 		}
 	}
+	 free(tcells);
+	 free(expected);
 }
 
 void TestIsStayAlive() {
 	cell *tcells; 
-	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
+	tcells = (cell *)malloc(5*sizeof(cell));
 	initialize_cells(tcells, 5, 5);
 
 	//that can be alive test (0,1)
@@ -116,11 +119,14 @@ void TestIsStayAlive() {
 		   SUCESS("	PASS\n");
 		}
 	}
+	free(tcells);
 }
 
 void TestGetNeighbors() {
 	cell *tcells; 
-	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
+	setLIMIT(10);
+
+	tcells = (cell *)malloc(10*sizeof(cell));
 	initialize_cells(tcells, 10, 10);
 
 	//that can be alive test (0,1)
@@ -159,11 +165,12 @@ void TestGetNeighbors() {
 		   SUCESS("	PASS\n");
 		}
 	}
+	free(tcells);
 }
 
 void TestIsAlive() {
 	cell *tcells; 
-	tcells = (cell *)malloc(LIMIT_CELLS*sizeof(cell));
+	tcells = (cell *)malloc(5*sizeof(cell));
 	initialize_cells(tcells, 5,5);
 
 	//alive test
@@ -199,6 +206,7 @@ void TestIsAlive() {
 		   SUCESS("	PASS\n");
 		}
 	}
+	free(tcells);
 } 
 
 void setMatriz(cell *c, int matriz[5][5]) {

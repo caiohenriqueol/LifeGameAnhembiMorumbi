@@ -9,7 +9,7 @@ int main() {
 
 	printf("\n\n");
 
-	/*
+	
 	printf("RUN : TestGetNeighbors \n");
 	TestGetNeighbors();
 	printf("END : TestGetNeighbors \n");
@@ -28,7 +28,7 @@ int main() {
 
 	printf("*********************** END :TEST UNIT ****************************\n");
 
-	*/
+	
 
 	printf("\n\n");
 	return 1;
