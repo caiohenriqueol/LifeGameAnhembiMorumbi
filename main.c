@@ -1,16 +1,15 @@
 #include "cell.c"
-#include "file.c"
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h> 
 
-int main() {
+int main(int argc, char *argv[]) {
     int linha, coluna, generation;
     int cont_kill, cont_rise;    
     cell *vKill;
     cell *vRise;
     cell *population;
-    int MAX_GENERATION = 1;
+    int MAX_GENERATION = atoi(argv[2]);
 
     int population_size = 5;
     int kill_rise_size = 100;
@@ -18,21 +17,13 @@ int main() {
     vKill = (cell*)calloc(kill_rise_size, sizeof(cell));
     vRise = (cell*)calloc(kill_rise_size, sizeof(cell));
     population = (cell*)calloc(population_size, sizeof(cell));
-    
-    srand(time(NULL));
 
     for (linha = 0; linha < population_size; linha++) {
         population[linha] = (cell)calloc(population_size, sizeof(cell));
     }
 
     printf("******************* POPULACAO *****************\n");
-    for (linha = 0; linha < population_size; linha++) {
-        for (coluna = 0; coluna < population_size; coluna++) {
-            population[linha][coluna] = rand()%2;
-            printf("%d  ", population[linha][coluna]);
-        }
-        printf("\n");
-    }
+    importPopulation(population, argv[1], LIMIT_CELLS);
     printf("******************* POPULACAO *****************\n");
     printf("\n\n\n");
 
